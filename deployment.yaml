@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thda-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: thda-app
+  template:
+    metadata:
+      labels:
+        app: thda-app
+    spec:
+      containers:
+        - name: thda-app
+          image: registry.digitalocean.com/thda/thda-app:latest
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "512Mi"
+            limits:
+              cpu: "400m"
+              memory: "1Gi"
+          ports:
+            - containerPort: 80
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: thda-app-configmap
+                  key: SPRING_DATASOURCE_URL
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: thda-app-configmap
+                  key: SPRING_DATASOURCE_USERNAME
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: thda-app-configmap
+                  key: SPRING_DATASOURCE_PASSWORD
+      imagePullSecrets:
+        - name: regcred
