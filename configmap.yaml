@@ -5,4 +5,4 @@ metadata:
 data:
   SPRING_DATASOURCE_URL: jdbc:postgresql://db-thda-do-user-15365662-0.h.db.ondigitalocean.com:25061/thda-user
   SPRING_DATASOURCE_USERNAME: doadmin
-  SPRING_DATASOURCE_PASSWORD: AVNS_8YVuOJWwuirIfgw8_G8
+  SPRING_DATASOURCE_PASSWORD: password
